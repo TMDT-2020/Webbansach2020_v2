@@ -14,6 +14,12 @@
     <script src="https://kit.fontawesome.com/9f6f80da6b.js" crossorigin="anonymous"></script>
     <script src="~/Scripts/Home.js"></script>
     <link rel="stylesheet" href="~/Content/style.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 
     @Styles.Render("~/Content/css")
 
@@ -30,22 +36,30 @@
                     <a href="#">Danh Mục</a>
                     <a href="#">Hỗ Trợ</a>
                     <a href="#">Liên Hệ</a>
+                    @if (User.IsInRole("SuperAdmin"))
+                    {
+
+                        <a class="btn btn-dark" href="@Url.Action("QuanLi","Admin")">
+                            Quản lí
+                        </a>            
+                    }
                 </div>
             </div>
             <span class="nav-icon" onclick="openNav()">&#9776;</span>
+            
             <div class="nav-logo">
                 <i onclick="location.href='@Url.Action("Index","SanPhams")'"><img src="~/HinhAnh/Logo.png" style="width: 70px; height: auto;" alt=""></i>
             </div>
             <div class="nav-menu-right">
                 <ul>
+
                     <li class="ul-item" style="padding-top: 15px; ">
                         @using (Html.BeginForm("Searching", "SanPhams", FormMethod.Get))
                         {
-                            <p>
-                                <input id="searchString" name="searchString" type="text" value="" style="border: #FF6161 solid 1px;" placeholder="Bạn muốn tìm gì...">
-                                <button style="border:none;background:none;color:firebrick" class="btntop" type="submit"><i class="fas fa-search"></i></button>
-                            </p>
-                        }
+            <p>
+                <input id="searchString" name="searchString" type="text" value="" style="border: #FF6161 solid 1px;" placeholder="Bạn muốn tìm gì...">
+                <button style="border:none;background:none;color:firebrick" class="btntop" type="submit"><i class="fas fa-search"></i></button>
+            </p>}
                     </li>
                     <li>
                         @Html.Partial("_LoginPartial")
@@ -56,9 +70,8 @@
                             {
                                 foreach (Product item in (List<Product>)Session["cart"])
                                 {
-                                    <span style="color: white;">@item.SoLuong</span>
-                                }
-                            }
+                <span style="color: white;">@item.SoLuong</span>}
+        }
                             <i class="fas fa-shopping-cart" style="color: white;"></i>
                         </button>
                     </li>
@@ -101,8 +114,6 @@
         <hr id="hr">
         <h3 id="f-bottom">COPPYRIGHT@2020</h3>
     </footer>
-    @Scripts.Render("~/bundles/bootstrap")
-
     @RenderSection("scripts", required: false)
 </body>
 

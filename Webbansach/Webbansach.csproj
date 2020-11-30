@@ -214,7 +214,11 @@
     <Content Include="Content\owl.carousel.min.css" />
     <Content Include="Content\owl.theme.default.min.css" />
     <Content Include="Content\Register.css" />
+    <Content Include="Content\sleek.css" />
+    <Content Include="Content\sleek.rtl.css" />
     <Content Include="Content\style.css" />
+    <Content Include="Content\styles.css" />
+    <Content Include="Content\styles.rtl.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -222,19 +226,31 @@
     <Content Include="HinhAnh\Logo.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\sleek.css.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Scripts\custom.js" />
+    <Content Include="Scripts\date-range.js" />
     <Content Include="Scripts\Home.js" />
+    <Content Include="Scripts\index.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-migrate-1.4.1.min.js" />
+    <Content Include="Scripts\jquery.js" />
+    <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\jquery.slimscroll.js" />
+    <Content Include="Scripts\jquery.slimscroll.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\map.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\owl.carousel.min.js" />
+    <Content Include="Scripts\sleek.bundle.js" />
+    <Content Include="Scripts\sleek.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -319,6 +335,10 @@
     <Content Include="Views\OrderDetails\Details.cshtml" />
     <Content Include="Views\OrderDetails\Edit.cshtml" />
     <Content Include="Views\OrderDetails\Index.cshtml" />
+    <Content Include="Scripts\sleek.bundle.js.map" />
+    <Content Include="Scripts\sleek.js.map" />
+    <Content Include="Views\Admin\QuanLi.cshtml" />
+    <Content Include="Views\SanPhams\Index2.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

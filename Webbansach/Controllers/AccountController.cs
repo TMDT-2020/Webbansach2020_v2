@@ -151,7 +151,7 @@ namespace Webbansach.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Firstname + " " + model.Lastname, FirstName = model.Firstname, LastName = model.Lastname, Email = model.Email, Adress = model.Adress, SDT = model.SDT, score = model.score };
+                var user = new ApplicationUser { UserName = model.Email, FirstName = model.Firstname, LastName = model.Lastname, Email = model.Email, Adress = model.Adress, SDT = model.SDT, score = model.score };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

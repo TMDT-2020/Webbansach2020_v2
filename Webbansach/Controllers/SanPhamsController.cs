@@ -58,7 +58,10 @@ namespace Webbansach.Controllers
             else
                 return s;
         }
-
+        public ActionResult Index2()
+        {
+            return View(db.sanPhams.ToList());
+        }
         public ActionResult AddToCart(int productId, string url)
         {
             if(Session["cart"] == null)

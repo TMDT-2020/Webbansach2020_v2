@@ -65,9 +65,6 @@ namespace Webbansach.Models
 
     public class RegisterViewModel
     {
-        [EmailAddress]
-        [Display(Name = "Email")]
-        public string Email { get; set; }
 
         [Display(Name = "lastname")]
         public string Lastname { get; set; }
@@ -83,6 +80,10 @@ namespace Webbansach.Models
 
         [Display(Name = "reputation score")]
         public float score { get; set; }
+
+        [EmailAddress]
+        [Display(Name = "Email")]
+        public string Email { get; set; }
 
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]

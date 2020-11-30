@@ -22,5 +22,9 @@ namespace Webbansach.Controllers
         {
             return View();
         }
+        public ActionResult QuanLi()
+        {
+            return View();
+        }
     }
 }
