@@ -1,0 +1,22 @@
+﻿
+@using Webbansach.Models
+@{
+    ApplicationDbContext db = new ApplicationDbContext();
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.js"></script>
+
+    <script src="~/Scripts/Home.js"></script>
+}
+<main>
+    <div class="container-auto">    
+        <div class="owl-carousel owl-theme">
+            @foreach (var item in db.theLoais)
+            {
+                <div class="item"><button onclick="location.href='@Url.Action("Details", "Theloais", new {id = item.ID})'">@item.TenTheLoai</button></div>
+            }
+        </div>
+    </div>
+</main>
+
+

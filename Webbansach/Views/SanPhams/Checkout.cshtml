@@ -1,0 +1,64 @@
+﻿@using Webbansach.Models
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Checkout</h2>
+@if (Session["cart"] == null)
+{
+    <div class="alert alert-danger">
+        <strong>Không có sản phẩm nào dược thêm vào giỏ hàng!</strong>
+        @using (Html.BeginForm("Index", "SanPhams", FormMethod.Get))
+        {
+            <input class="buynow" value="Quay lại trang chủ" type="submit" />
+        }
+    </div>
+}
+else
+{
+    foreach (Product item in (List<Product>)Session["cart"])
+    {
+        int thanhtien = Convert.ToInt32(item.SoLuong * item.SanPham.GiaKM);
+
+        Session["SesTotal"] = thanhtien;
+
+        <ul class="list-group group-TT">
+            <li class="list-group-item TT">Giỏ hàng</li>
+            <li class="list-group-item item-TT">
+                <span><img width="40" src="~/HinhAnh/@item.SanPham.HinhAnh" /></span>
+                <a class="item-tintuc" href="@Url.Action("Details","SanPhams",new { productId = item.SanPham.ID })">@item.SanPham.TenSP</a>
+                <p>@item.SanPham.GiaKM</p>
+                <span>
+                    <a href="@Url.Action("AddToCart","SanPhams", new { productId = item.SanPham.ID,url="Checkout" })">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                    @item.SoLuong
+                    <a href="@Url.Action("DecreaseQ","SanPhams", new { productId = item.SanPham.ID})">
+                        <i class="fas fa-minus"></i>
+                    </a>
+                    <a href="@Url.Action("Remove","SanPhams", new { productId = item.SanPham.ID})">
+                        <i class="fas fa-trash"></i>
+                    </a>
+                </span>
+                <h4>Thành tiền: @thanhtien</h4>
+            </li>
+        </ul>
+        if (item.SoLuong > 0)
+        {
+            <a href="@Url.Action("CheckoutDetail", "SanPhams")" class="btn btn-success">Kiểm tra</a>
+
+        }
+        else
+        {
+            <div class="alert alert-danger">
+                <strong>Không có sản phẩm nào dược thêm vào giỏ hàng!</strong>
+                @using (Html.BeginForm("Index", "SanPhams", FormMethod.Get))
+                {
+                    <input class="buynow" value="Quay lại trang chủ" type="submit" />
+                }
+            </div>
+        }
+    }
+}
+

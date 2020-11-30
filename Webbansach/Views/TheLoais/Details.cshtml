@@ -1,0 +1,27 @@
+﻿@model IEnumerable<Webbansach.Models.SanPham>
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container-auto">
+    <div class="product2-1">
+        <div class="product2">
+            @foreach (var item in Model)
+            {
+                <div class="item-product2">
+                    <div class="item-product-overlay-2">
+                        <img src="~/HinhAnh/@item.HinhAnh" alt="Owl Image">
+                        <a href="@Url.Action("Details","SanPhams",new { id = item.ID })" class="overlay-2">Mua ngay</a>
+                    </div>
+                    <div class="sub-product-2">
+                        <i class="fas fa-star"></i>
+                        <h4>@item.TenSP</h4>
+                        <span><p class="p1">@item.GiaKM</p><p class="p2">@item.GiaSP</p></span>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

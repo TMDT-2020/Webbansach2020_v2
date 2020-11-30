@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: url(../img/1x/background.png);
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+}
+
+.back{
+    width: 100%;
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+}
+.back i{
+    color: #FF6161;
+    margin: 30px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+main{
+    width: 100%;
+    height: auto;
+    right: 0px;
+}
+.Register{
+    background-color: white;
+    width: 40%;
+    height: 500px;
+    float: right;
+    margin-top: 4%;
+    margin-right: 8%;
+    display: block;
+    border: 2px solid #FF6161;
+    border-radius: 20px;
+}
+
+.Register h1{
+    text-align: center;   
+    margin: 20px 0px 0px 0px;
+    font-size: 25px;
+    color: #FF6161;
+}
+
+.container {
+    padding: 16px;
+}
+
+input{
+    width: 49%;
+    padding: 14px 20px;
+    margin: 20px 0;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.btn-outline-secondary1{
+    border: none;
+    position: absolute;
+    background-color: white;
+    right: 30%;
+    top: 66%;
+}
+
+.btn-outline-secondary1:active, .btn-outline-secondary1:focus{
+    outline: 0;
+    outline-style: none;
+    outline-width: 0;
+}
+
+.btn-outline-secondary2{
+    border: none;
+    position: absolute;
+    background-color: white;
+    right: 11%;
+    top: 66%;
+    display: block;
+}
+
+.btn-outline-secondary2:active, .btn-outline-secondary2:focus{
+    outline: 0;
+    outline-style: none;
+    outline-width: 0;
+}
+
+
+.container input:active, input:focus {     
+       outline: 0;     
+       outline-style: none;     
+       outline-width: 0; 
+}
+
+.fa-eye{
+    color: #FF6161;
+    cursor: pointer;
+}
+.fa-eye:hover{
+    opacity: 0.8;
+}
+.btnlogin {
+    background-color:#FF6161;
+    color: white;
+    padding: 14px 20px;
+    margin: 30px 0;
+    border: 1px;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 20px;
+}
+  
+.btnlogin:hover {
+    opacity: 0.8;
+}
+
+.btnlogin:active, .btnlogin:focus {     
+    outline: 0;     
+    outline-style: none;     
+    outline-width: 0; 
+}  
+  
+  
