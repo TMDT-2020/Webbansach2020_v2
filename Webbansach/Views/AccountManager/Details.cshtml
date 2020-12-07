@@ -1,0 +1,19 @@
+﻿@using Webbansach.Models
+@using Microsoft.AspNet.Identity
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ApplicationDbContext db = new ApplicationDbContext();
+
+}
+@{ 
+    var user = User.Identity.GetUserId();
+    ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == user);
+}
+<div class="container">
+    <h3>@currentUser.Email</h3>
+    <h3>@currentUser.LastName @currentUser.FirstName</h3>
+    <h3>@currentUser.SDT</h3>
+    <h3>@currentUser.score</h3>
+    <a class="btn btn-outline-dark" href="@Url.Action("Index","OrderDetails")" role="button">Quản Lí Đơn Hàng</a>
+</div>

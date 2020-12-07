@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -15,10 +16,13 @@ namespace Webbansach.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: OrderDetails
-        public ActionResult Index()
+        public ActionResult Index(Order order)
         {
-            var orderDetails = db.OrderDetails.Include(o => o.Order).Include(o => o.SanPham);
-            return View(orderDetails.ToList());
+            var user = User.Identity.GetUserId();
+            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == user);
+
+            List<OrderDetail> orderDetails = db.OrderDetails.Where(x => x.Order.UserID == currentUser.Id).ToList();
+            return View(orderDetails);
         }
 
         // GET: OrderDetails/Details/5
