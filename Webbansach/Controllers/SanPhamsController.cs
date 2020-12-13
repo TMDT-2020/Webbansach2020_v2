@@ -258,6 +258,11 @@ namespace Webbansach.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.MaTG = new SelectList(db.tacGias, "ID", "TenTacGia");
+            ViewBag.MaNXB = new SelectList(db.nXBs, "ID", "TenNXB");
+            ViewBag.MaLoai = new SelectList(db.theLoais, "ID", "TenTheLoai");
+            ViewBag.MaKM = new SelectList(db.khuyenMais, "ID", "TenKM", "PTKM");
+
             return View(sanPham);
         }
 
@@ -266,14 +271,25 @@ namespace Webbansach.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,TenSP,MaTG,MaNXB,NamXB,MaLoai,MaKM,DanhGia,BinhLuan,Mota,ChieuCao,ChieuRong,SoTrang,SoLuongSach,HinhAnh,GiaSP,PTKM")] SanPham sanPham)
+        public ActionResult Edit([Bind(Include = "ID,TenSP,MaTG,MaNXB,NamXB,MaLoai,MaKM,DanhGia,BinhLuan,Mota,ChieuCao,ChieuRong,SoTrang,SoLuongSach,HinhAnh,GiaSP,PTKM")] SanPham sanPham, HttpPostedFileBase img)
         {
             if (ModelState.IsValid)
             {
+                if (img != null && img.ContentLength > 0)
+                {
+                    string _file = Path.GetFileName(img.FileName);
+                    sanPham.HinhAnh = _file;
+                    string _path = Path.Combine(Server.MapPath("~/HinhAnh"), _file);
+                    img.SaveAs(_path);
+                }
                 db.Entry(sanPham).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            ViewBag.MaTG = new SelectList(db.tacGias, "ID", "TenTacGia", sanPham.MaTG);
+            ViewBag.MaNXB = new SelectList(db.nXBs, "ID", "TenNXB", sanPham.MaNXB);
+            ViewBag.MaLoai = new SelectList(db.theLoais, "ID", "TenTheLoai", sanPham.MaLoai);
+            ViewBag.MaKM = new SelectList(db.khuyenMais, "ID", "TenKM", "PTKM", sanPham.MaKM);
             return View(sanPham);
         }
 
