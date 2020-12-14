@@ -79,7 +79,7 @@ namespace Webbansach.Controllers
             else
             {
                 List<Product> cart = (List<Product>)Session["cart"];
-                var product = db.sanPhams.Find(productId);
+                var product = db.sanPhams.Find(productId); 
                 foreach(var item in cart)
                 {
                     if(item.SanPham.ID == productId)
@@ -175,7 +175,7 @@ namespace Webbansach.Controllers
                 PaymentType = "Cash",
                 Status = "Hoan thanh",
                 UserID = currentUser.Id
-
+                
             };
             db.orders.Add(order);
             db.SaveChanges();

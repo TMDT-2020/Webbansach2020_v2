@@ -1,5 +1,4 @@
 ﻿@model IEnumerable<Webbansach.Models.OrderDetail>
-@using Webbansach.Models
 
 @{
     ViewBag.Title = "Index";
@@ -11,7 +10,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table class="table container">
+<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Order.Email)
@@ -19,6 +18,10 @@
         <th>
             @Html.DisplayNameFor(model => model.SanPham.TenSP)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Order.OrderDate)
+        </th>
+
         <th>
             @Html.DisplayNameFor(model => model.Gia)
         </th>
@@ -28,10 +31,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Order.Status)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Order.OrderDate)
-        </th>
-
         <th></th>
     </tr>
 
@@ -44,6 +43,10 @@
         @Html.DisplayFor(modelItem => item.SanPham.TenSP)
     </td>
     <td>
+        @Html.DisplayFor(modelItem => item.Order.OrderDate)
+    </td>
+
+    <td>
         @Html.DisplayFor(modelItem => item.Gia)
     </td>
     <td>
@@ -52,10 +55,6 @@
     <td>
         @Html.DisplayFor(modelItem => item.Order.Status)
     </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Order.OrderDate)
-    </td>
-
 
     <td>
         @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |

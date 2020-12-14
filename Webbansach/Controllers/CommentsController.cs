@@ -11,123 +11,131 @@ using Webbansach.Models;
 
 namespace Webbansach.Controllers
 {
-    public class OrderDetailsController : Controller
+    public class CommentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: OrderDetails
-        public ActionResult Index(Order order)
+        // GET: Comments
+        public ActionResult Index()
         {
-            var user = User.Identity.GetUserId();
-            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == user);
+            var comments = db.comments.Include(c => c.SanPham);
+            return View(comments.ToList());
+        }
 
-            List<OrderDetail> orderDetails = db.OrderDetails.Where(x => x.Order.UserID == currentUser.Id).ToList();
-            return View(orderDetails);
-        }
-        public ActionResult Index2()
-        {
-            var orderDetails = db.OrderDetails.Include(o => o.Order).Include(o => o.SanPham);
-            return View(orderDetails.ToList());
-        }
-        // GET: OrderDetails/Details/5
+        // GET: Comments/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OrderDetail orderDetail = db.OrderDetails.Find(id);
-            if (orderDetail == null)
+            Comment comment = db.comments.Find(id);
+            if (comment == null)
             {
                 return HttpNotFound();
             }
-            return View(orderDetail);
+            return View(comment);
+        }
+        [HttpPost]
+        public ActionResult TaoComment(int productId, int UserID, Comment comment2)
+        {
+            var product = db.sanPhams.Find(productId);
+            var user = User.Identity.GetUserId();
+            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == user); 
+            Comment comment = new Comment()
+            {
+                UserID = currentUser.Id,
+                NoiDung = comment2.NoiDung,
+                SanPhamID = product.ID
+
+            };
+            db.comments.Add(comment);
+            db.SaveChanges();
+
+            return RedirectToAction("Details", "SanPhams");
+
         }
 
-        // GET: OrderDetails/Create
+        // GET: Comments/Create
         public ActionResult Create()
         {
-            ViewBag.OrderID = new SelectList(db.orders, "ID", "OrderName");
             ViewBag.SanPhamID = new SelectList(db.sanPhams, "ID", "TenSP");
             return View();
         }
 
-        // POST: OrderDetails/Create
+        // POST: Comments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,OrderID,SanPhamID,Gia,SoLuong")] OrderDetail orderDetail)
+        public ActionResult Create([Bind(Include = "ID,NoiDung,SanPhamID,UserID")] Comment comment)
         {
             if (ModelState.IsValid)
             {
-                db.OrderDetails.Add(orderDetail);
+                db.comments.Add(comment);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.OrderID = new SelectList(db.orders, "ID", "OrderName", orderDetail.OrderID);
-            ViewBag.SanPhamID = new SelectList(db.sanPhams, "ID", "TenSP", orderDetail.SanPhamID);
-            return View(orderDetail);
+            ViewBag.SanPhamID = new SelectList(db.sanPhams, "ID", "TenSP", comment.SanPhamID);
+            return View(comment);
         }
 
-        // GET: OrderDetails/Edit/5
+        // GET: Comments/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OrderDetail orderDetail = db.OrderDetails.Find(id);
-            if (orderDetail == null)
+            Comment comment = db.comments.Find(id);
+            if (comment == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.OrderID = new SelectList(db.orders, "ID", "OrderName", orderDetail.OrderID);
-            ViewBag.SanPhamID = new SelectList(db.sanPhams, "ID", "TenSP", orderDetail.SanPhamID);
-            return View(orderDetail);
+            ViewBag.SanPhamID = new SelectList(db.sanPhams, "ID", "TenSP", comment.SanPhamID);
+            return View(comment);
         }
 
-        // POST: OrderDetails/Edit/5
+        // POST: Comments/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,OrderID,SanPhamID,Gia,SoLuong")] OrderDetail orderDetail)
+        public ActionResult Edit([Bind(Include = "ID,NoiDung,SanPhamID,UserID")] Comment comment)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(orderDetail).State = EntityState.Modified;
+                db.Entry(comment).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.OrderID = new SelectList(db.orders, "ID", "OrderName", orderDetail.OrderID);
-            ViewBag.SanPhamID = new SelectList(db.sanPhams, "ID", "TenSP", orderDetail.SanPhamID);
-            return View(orderDetail);
+            ViewBag.SanPhamID = new SelectList(db.sanPhams, "ID", "TenSP", comment.SanPhamID);
+            return View(comment);
         }
 
-        // GET: OrderDetails/Delete/5
+        // GET: Comments/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            OrderDetail orderDetail = db.OrderDetails.Find(id);
-            if (orderDetail == null)
+            Comment comment = db.comments.Find(id);
+            if (comment == null)
             {
                 return HttpNotFound();
             }
-            return View(orderDetail);
+            return View(comment);
         }
 
-        // POST: OrderDetails/Delete/5
+        // POST: Comments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            OrderDetail orderDetail = db.OrderDetails.Find(id);
-            db.OrderDetails.Remove(orderDetail);
+            Comment comment = db.comments.Find(id);
+            db.comments.Remove(comment);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

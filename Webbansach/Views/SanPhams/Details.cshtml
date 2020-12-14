@@ -1,27 +1,31 @@
 ﻿@model Webbansach.Models.SanPham
+
+@using Webbansach.Models
 @{
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/_Layout.cshtml";
     <link rel="stylesheet" href="~/Content/Detail.css" />
+    ApplicationDbContext db = new ApplicationDbContext();
+
 }
 
 <main>
     @*<div class="News">
-        <div class="new">
-            <span>Tin tức</span>
-        </div>
-        @foreach (var item in Model)
-        {
-            <marquee scrollamount="10">
-                <a class="text-info">
-                    <b style="margin-left: 80px">
-                        @item.TieuDe
-                    </b>
-                </a>
-            </marquee>
-        }
+            <div class="new">
+                <span>Tin tức</span>
+            </div>
+            @foreach (var item in Model)
+            {
+                <marquee scrollamount="10">
+                    <a class="text-info">
+                        <b style="margin-left: 80px">
+                            @item.TieuDe
+                        </b>
+                    </a>
+                </marquee>
+            }
 
-    </div>*@
+        </div>*@
     <div class="infor-product">
         <div class="infor-1 infor">
             <img src="~/HinhAnh/@Model.HinhAnh" alt="">
@@ -47,7 +51,7 @@
             <br>
             <span style="color: red; font-size: 20px;"><b>@((int)Model.GiaKM) đ</b> <p class="p2">@Model.GiaSP đ</p></span><br>
 
-            @using (Html.BeginForm("AddToCart", "SanPhams", new { productId = Model.ID}, FormMethod.Post))
+            @using (Html.BeginForm("AddToCart", "SanPhams", new { productId = Model.ID }, FormMethod.Post))
             {
 
                 <button type="submit"> Mua Ngay</button>
@@ -82,69 +86,23 @@
                 <i>@Model.SoTrang</i><br>
 
             </div>
+
         </div>
+        <br />
         <div class="description">
             <h2>Mô tả sản phẩm</h2>
             <span>
                 @Model.Mota
             </span>
         </div>
+        <div>
+            <div id="fb-root"></div>
+
+            <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v9.0&appId=396073371824051&autoLogAppEvents=1" nonce="Hla2cw0o"></script>
+            <div class="fb-comments" data-href="https://localhost:44388/SanPhams/Details/@Model.ID" data-numposts="10" data-width=""></div>
+
+        </div>
+
     </div>
-    @*<div class="related-products">
-            <div class="item-product">
-                <div class="item-product-overlay">
-                    <img src="./img/1x/img-1.png" alt="Owl Image">
-                    <a class="overlay">Mua ngay</a>
-                </div>
-                <div class="sub-product">
-                    <i class="fas fa-star"></i>
-                    <h3>Thoát khỏi bẫy cảm xúc</h3>
-                    <span><p class="p1">88.000đ</p><p class="p2">88.000đ</p></span>
-                </div>
-            </div>
-            <div class="item-product">
-                <div class="item-product-overlay">
-                    <img src="./img/1x/img-1.png" alt="Owl Image">
-                    <a class="overlay">Mua ngay</a>
-                </div>
-                <div class="sub-product">
-                    <i class="fas fa-star"></i>
-                    <h3>Thoát khỏi bẫy cảm xúc</h3>
-                    <span><p class="p1">88.000đ</p><p class="p2">88.000đ</p></span>
-                </div>
-            </div>
-            <div class="item-product">
-                <div class="item-product-overlay">
-                    <img src="./img/1x/img-1.png" alt="Owl Image">
-                    <a class="overlay">Mua ngay</a>
-                </div>
-                <div class="sub-product">
-                    <i class="fas fa-star"></i>
-                    <h3>Thoát khỏi bẫy cảm xúc</h3>
-                    <span><p class="p1">88.000đ</p><p class="p2">88.000đ</p></span>
-                </div>
-            </div>
-            <div class="item-product">
-                <div class="item-product-overlay">
-                    <img src="./img/1x/img-1.png" alt="Owl Image">
-                    <a class="overlay">Mua ngay</a>
-                </div>
-                <div class="sub-product">
-                    <i class="fas fa-star"></i>
-                    <h3>Thoát khỏi bẫy cảm xúc </h3>
-                    <span><p class="p1">88.000đ</p><p class="p2">88.000đ</p></span>
-                </div>
-            </div>
-            <div class="item-product">
-                <div class="item-product-overlay">
-                    <img src="./img/1x/img-1.png" alt="Owl Image">
-                    <a class="overlay">Mua ngay</a>
-                </div>
-                <div class="sub-product">
-                    <i class="fas fa-star"></i>
-                    <h3>Thoát khỏi bẫy cảm xúc</h3>
-                    <span><p class="p1">88.000đ</p><p class="p2">88.000đ</p></span>
-                </div>
-            </div>
-        </div>*@
+
 </main>

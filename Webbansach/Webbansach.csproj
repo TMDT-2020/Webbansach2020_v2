@@ -173,10 +173,12 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountManagerController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhuyenMaisController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\NXBsController.cs" />
+    <Compile Include="Controllers\OrderDetails1Controller.cs" />
     <Compile Include="Controllers\OrderDetailsController.cs" />
     <Compile Include="Controllers\PaymentController.cs" />
     <Compile Include="Controllers\SanPhamsController.cs" />
@@ -187,6 +189,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Gmail.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\InfoUser.cs" />
@@ -344,6 +347,16 @@
     <Content Include="Views\AccountManager\Index.cshtml" />
     <Content Include="Views\AccountManager\Details.cshtml" />
     <Content Include="Views\AccountManager\TheoDoiDonHang.cshtml" />
+    <Content Include="Views\Comments\Create.cshtml" />
+    <Content Include="Views\Comments\Delete.cshtml" />
+    <Content Include="Views\Comments\Details.cshtml" />
+    <Content Include="Views\Comments\Edit.cshtml" />
+    <Content Include="Views\Comments\Index.cshtml" />
+    <Content Include="Views\OrderDetails1\Create.cshtml" />
+    <Content Include="Views\OrderDetails1\Delete.cshtml" />
+    <Content Include="Views\OrderDetails1\Details.cshtml" />
+    <Content Include="Views\OrderDetails1\Edit.cshtml" />
+    <Content Include="Views\OrderDetails1\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

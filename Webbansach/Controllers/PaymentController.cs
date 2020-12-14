@@ -56,16 +56,16 @@ namespace Webbansach.Controllers
                     //If executed payment failed then we will show payment failure message to user  
                     if (executedPayment.state.ToLower() != "approved")
                     {
-                        return View("FailView");
+                        return RedirectToAction("ProcessOrder", "SanPhams");
                     }
                 }
             }
             catch (Exception ex)
             {
-                return View("FailView");
+                return RedirectToAction("ProcessOrder", "SanPhams");
             }
             //on successful payment, show success page to user.  
-            return View("SuccessView");
+            return RedirectToAction("ProcessOrder", "SanPhams");
         }
         private PayPal.Api.Payment payment;
         private Payment ExecutePayment(APIContext apiContext, string payerId, string paymentId)
@@ -87,6 +87,7 @@ namespace Webbansach.Controllers
             {
                 items = new List<Item>()
             };
+
             //Adding Item Details like name, currency, price etc  
             itemList.items.Add(new Item()
             {

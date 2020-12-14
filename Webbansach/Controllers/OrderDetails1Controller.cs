@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNet.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -11,25 +10,18 @@ using Webbansach.Models;
 
 namespace Webbansach.Controllers
 {
-    public class OrderDetailsController : Controller
+    public class OrderDetails1Controller : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: OrderDetails
-        public ActionResult Index(Order order)
-        {
-            var user = User.Identity.GetUserId();
-            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == user);
-
-            List<OrderDetail> orderDetails = db.OrderDetails.Where(x => x.Order.UserID == currentUser.Id).ToList();
-            return View(orderDetails);
-        }
-        public ActionResult Index2()
+        // GET: OrderDetails1
+        public ActionResult Index()
         {
             var orderDetails = db.OrderDetails.Include(o => o.Order).Include(o => o.SanPham);
             return View(orderDetails.ToList());
         }
-        // GET: OrderDetails/Details/5
+
+        // GET: OrderDetails1/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -44,7 +36,7 @@ namespace Webbansach.Controllers
             return View(orderDetail);
         }
 
-        // GET: OrderDetails/Create
+        // GET: OrderDetails1/Create
         public ActionResult Create()
         {
             ViewBag.OrderID = new SelectList(db.orders, "ID", "OrderName");
@@ -52,7 +44,7 @@ namespace Webbansach.Controllers
             return View();
         }
 
-        // POST: OrderDetails/Create
+        // POST: OrderDetails1/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -71,7 +63,7 @@ namespace Webbansach.Controllers
             return View(orderDetail);
         }
 
-        // GET: OrderDetails/Edit/5
+        // GET: OrderDetails1/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -88,7 +80,7 @@ namespace Webbansach.Controllers
             return View(orderDetail);
         }
 
-        // POST: OrderDetails/Edit/5
+        // POST: OrderDetails1/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -106,7 +98,7 @@ namespace Webbansach.Controllers
             return View(orderDetail);
         }
 
-        // GET: OrderDetails/Delete/5
+        // GET: OrderDetails1/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -121,7 +113,7 @@ namespace Webbansach.Controllers
             return View(orderDetail);
         }
 
-        // POST: OrderDetails/Delete/5
+        // POST: OrderDetails1/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
