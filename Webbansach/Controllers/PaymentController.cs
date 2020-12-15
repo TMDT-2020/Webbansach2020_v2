@@ -78,58 +78,69 @@ namespace Webbansach.Controllers
             {
                 id = paymentId
             };
-            return this.payment.Execute(apiContext, paymentExecution);
+            var a = payment.Execute(apiContext, paymentExecution);
+            return a;
         }
-        private Payment CreatePayment(APIContext apiContext, string redirectUrl)
-        {
-            //create itemlist and add item objects to it  
-            var itemList = new ItemList()
-            {
-                items = new List<Item>()
-            };
+        public Payment CreatePayment(APIContext apiContext, string redirectUrl)
 
-            //Adding Item Details like name, currency, price etc  
-            itemList.items.Add(new Item()
+        {
+            List<Product> cart = (List<Product>)Session["cart"];
+            //create itemlist and add item objects to it
+            var itemList = new ItemList() { items = new List<Item>() };
+            int sub = 0;
+            //Adding Item Details like name, currency, price etc
+            foreach(var item in cart)
             {
-                name = "Item Name comes here",
-                currency = "USD",
-                price = "1",
-                quantity = "1",
-                sku = "sku"
-            });
-            var payer = new Payer()
-            {
-                payment_method = "paypal"
-            };
-            // Configure Redirect Urls here with RedirectUrls object  
+                itemList.items.Add(new Item()
+                {
+                    name = item.SanPham.TenSP.ToString(),
+                    currency = "USD",
+                    price = item.SanPham.GiaKM.ToString(),
+                    quantity = item.SoLuong.ToString(),
+                    sku = "sku"
+                });
+                sub = Convert.ToInt32(item.SanPham.GiaKM * item.SoLuong);
+            }
+
+            var payer = new Payer() { payment_method = "paypal" };
+
+            // Configure Redirect Urls here with RedirectUrls object
             var redirUrls = new RedirectUrls()
             {
                 cancel_url = redirectUrl + "&Cancel=true",
                 return_url = redirectUrl
             };
-            // Adding Tax, shipping and Subtotal details  
+            int ship = 15000;
+            int taxx = 10000;
+            int discount = 5000;
+            // Adding Tax, shipping and Subtotal details
             var details = new Details()
             {
-                tax = "1",
-                shipping = "1",
-                subtotal = "1"
+                tax = taxx.ToString(),
+                shipping = ship.ToString(),
+                subtotal = sub.ToString(),
+                shipping_discount = discount.ToString()
             };
-            //Final amount with details  
+
+            //Final amount with details
             var amount = new Amount()
             {
                 currency = "USD",
-                total = "3", // Total must be equal to sum of tax, shipping and subtotal.  
+                total = (taxx + ship + sub - discount).ToString(), // Total must be equal to sum of tax, shipping and subtotal.
                 details = details
             };
+
             var transactionList = new List<Transaction>();
-            // Adding description about the transaction  
+            // Adding description about the transaction
             transactionList.Add(new Transaction()
             {
                 description = "Transaction description",
-                invoice_number = "your generated invoice number", //Generate an Invoice No  
+                invoice_number = Convert.ToString((new Random()).Next(100000)),
                 amount = amount,
                 item_list = itemList
             });
+
+
             this.payment = new Payment()
             {
                 intent = "sale",
@@ -137,9 +148,9 @@ namespace Webbansach.Controllers
                 transactions = transactionList,
                 redirect_urls = redirUrls
             };
-            // Create a payment using a APIContext  
+
+            // Create a payment using a APIContext
             return this.payment.Create(apiContext);
         }
-
     }
 }

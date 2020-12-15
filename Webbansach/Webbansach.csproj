@@ -201,6 +201,7 @@
     <Compile Include="Models\OrderDetail.cs" />
     <Compile Include="Models\PaypalCofiguration.cs" />
     <Compile Include="Models\PaypalLogger.cs" />
+    <Compile Include="Models\product2.cs" />
     <Compile Include="Models\SanPham.cs" />
     <Compile Include="Models\TacGia.cs" />
     <Compile Include="Models\TheLoai.cs" />
