@@ -22,7 +22,9 @@
         <th>
             @Html.DisplayNameFor(model => model.Gia)
         </th>
-
+        <th>
+            @Html.DisplayNameFor(model => model.Order.PaymentType)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.SoLuong)
         </th>
@@ -52,6 +54,9 @@
                 @Html.DisplayFor(modelItem => item.Gia)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.Order.PaymentType)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.SoLuong)
             </td>
             <td>
@@ -63,8 +68,12 @@
 
 
             <td>
-                @Html.ActionLink("Hủy đơn hàng", "Editor3", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+                @if (item.Order.Status.Length > 8)
+                {
+                    @Html.ActionLink("Hủy đơn hàng", "Editor3", new { id = item.ID })
+
+                } |
+                @Html.ActionLink("Details", "Details", new { id = item.ID })
             </td>
         </tr>
     }

@@ -204,11 +204,62 @@ namespace Webbansach.Controllers
             {
                 To = currentUser.Email,
                 Subject = "Hoá đơn điện tử",
-                Body = ("Đơn hàng " + order.ID + "Đã đặt thành công bạn có thể tra cứu tại: webbansach2020tmdt.com")
+                Body = ("Đơn hàng " + order.ID + " Đã đặt thành công bạn có thể tra cứu tại: webbansach2020tmdt.com")
             };
             gmail.SendMail();
             Session["cart"] = cart;
             return RedirectToAction("Index","OrderDetails");
+        }
+        public ActionResult ProcessOrderPaypal(int? productId, int? UserId, Gmail gmail)
+        {
+            List<Product> cart = (List<Product>)Session["cart"];
+            var product = db.sanPhams.Find(productId);
+            var user = User.Identity.GetUserId();
+            ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == user);
+
+            Order order = new Order()
+            {
+                OrderDate = DateTime.Now,
+                Name = currentUser.UserName,
+                Phone = currentUser.SDT,
+                Email = currentUser.Email,
+                Adress = currentUser.Adress,
+                PaymentType = "Paypal",
+                Status = "Đã thanh toán",
+                UserID = currentUser.Id
+
+            };
+            db.orders.Add(order);
+            db.SaveChanges();
+
+            foreach (var item in cart)
+            {
+                int ship = 15000;
+                int taxx = 10000;
+                int discount = 5000;
+                OrderDetail orderDetail = new OrderDetail()
+                {
+                    OrderID = order.ID,
+                    SanPhamID = item.SanPham.ID,
+                    Gia = Convert.ToInt32((item.SanPham.GiaKM * item.SoLuong) + ship + taxx - discount),
+                    SoLuong = item.SoLuong
+                };
+                db.OrderDetails.Add(orderDetail);
+                db.SaveChanges();
+
+                cart.Remove(item);
+                cart = null;
+                break;
+            }
+            gmail = new Gmail()
+            {
+                To = currentUser.Email,
+                Subject = "Hoá đơn điện tử",
+                Body = ("Đơn hàng " + order.ID + " Đã đặt thành công bạn có thể tra cứu tại: webbansach2020tmdt.com")
+            };
+            gmail.SendMail();
+            Session["cart"] = cart;
+            return RedirectToAction("Index", "OrderDetails");
         }
 
         public ActionResult HoanthanhOrder()
