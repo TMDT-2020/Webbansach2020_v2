@@ -43,35 +43,43 @@ namespace Webbansach.Controllers
             }
             return View(orderDetail);
         }
-
-        // GET: OrderDetails/Create
-        public ActionResult Create()
+        public ActionResult Editor3(int id)
         {
-            ViewBag.OrderID = new SelectList(db.orders, "ID", "OrderName");
-            ViewBag.SanPhamID = new SelectList(db.sanPhams, "ID", "TenSP");
-            return View();
+            var oder = new Order().ViewDT(id);
+            List<OrderDetail> orderDetails = db.OrderDetails.Where(x => x.ID == id).ToList();
+
+            return View(orderDetails);
         }
+
+        [HttpPost]
+        public ActionResult Editor3(Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                var ud = new Order();
+
+                var result = ud.Updatestt3(order);
+                if (result)
+                {
+                    return RedirectToAction("Index", "OrderDetails");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thay doi");
+                }
+            }
+            return RedirectToAction("Index", "OrderDetails");
+        }
+        // GET: OrderDetails/Create
 
         // POST: OrderDetails/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,OrderID,SanPhamID,Gia,SoLuong")] OrderDetail orderDetail)
-        {
-            if (ModelState.IsValid)
-            {
-                db.OrderDetails.Add(orderDetail);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.OrderID = new SelectList(db.orders, "ID", "OrderName", orderDetail.OrderID);
-            ViewBag.SanPhamID = new SelectList(db.sanPhams, "ID", "TenSP", orderDetail.SanPhamID);
-            return View(orderDetail);
-        }
-
         // GET: OrderDetails/Edit/5
+
+
+
+
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -93,7 +101,7 @@ namespace Webbansach.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,OrderID,SanPhamID,Gia,SoLuong")] OrderDetail orderDetail)
+        public ActionResult Edit(OrderDetail orderDetail)
         {
             if (ModelState.IsValid)
             {

@@ -173,7 +173,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountManagerController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\CommentsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\KhuyenMaisController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -188,8 +187,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202012171559519_init.cs" />
+    <Compile Include="Migrations\202012171559519_init.Designer.cs">
+      <DependentUpon>202012171559519_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\Gmail.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\InfoUser.cs" />
@@ -348,16 +351,15 @@
     <Content Include="Views\AccountManager\Index.cshtml" />
     <Content Include="Views\AccountManager\Details.cshtml" />
     <Content Include="Views\AccountManager\TheoDoiDonHang.cshtml" />
-    <Content Include="Views\Comments\Create.cshtml" />
-    <Content Include="Views\Comments\Delete.cshtml" />
-    <Content Include="Views\Comments\Details.cshtml" />
-    <Content Include="Views\Comments\Edit.cshtml" />
-    <Content Include="Views\Comments\Index.cshtml" />
     <Content Include="Views\OrderDetails1\Create.cshtml" />
     <Content Include="Views\OrderDetails1\Delete.cshtml" />
     <Content Include="Views\OrderDetails1\Details.cshtml" />
     <Content Include="Views\OrderDetails1\Edit.cshtml" />
     <Content Include="Views\OrderDetails1\Index.cshtml" />
+    <Content Include="Views\OrderDetails1\Editor.cshtml" />
+    <Content Include="Views\OrderDetails1\Editor2.cshtml" />
+    <Content Include="Views\OrderDetails1\Editor3.cshtml" />
+    <Content Include="Views\OrderDetails\Editor3.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -376,6 +378,11 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202012171559519_init.resx">
+      <DependentUpon>202012171559519_init.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

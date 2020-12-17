@@ -35,6 +35,90 @@ namespace Webbansach.Controllers
             }
             return View(orderDetail);
         }
+        public ActionResult Editor(int id)
+        {
+            var oder = new Order().ViewDT(id);
+            List<OrderDetail> orderDetails = db.OrderDetails.Where(x => x.ID == id).ToList();
+
+            return View(orderDetails);
+        }
+
+        [HttpPost]
+        public ActionResult Editor(Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                var ud = new Order();
+
+                var result = ud.Updatestt(order);
+                if (result)
+                {
+                    return RedirectToAction("Index", "OrderDetails1");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thay doi");
+                }
+            }
+            return RedirectToAction("Index", "OrderDetails1");
+        }
+
+        public ActionResult Editor2(int id)
+        {
+            var oder = new Order().ViewDT(id);
+            List<OrderDetail> orderDetails = db.OrderDetails.Where(x => x.ID == id).ToList();
+
+            return View(orderDetails);
+        }
+
+        [HttpPost]
+        public ActionResult Editor2(Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                var ud = new Order();
+
+                var result = ud.Updatestt2(order);
+                if (result)
+                {
+                    return RedirectToAction("Index", "OrderDetails1");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thay doi");
+                }
+            }
+            return RedirectToAction("Index", "OrderDetails1");
+        }
+
+        public ActionResult Editor3(int id)
+        {
+            var oder = new Order().ViewDT(id);
+            List<OrderDetail> orderDetails = db.OrderDetails.Where(x => x.ID == id).ToList();
+
+            return View(orderDetails);
+        }
+
+        [HttpPost]
+        public ActionResult Editor3(Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                var ud = new Order();
+
+                var result = ud.Updatestt3(order);
+                if (result)
+                {
+                    return RedirectToAction("Index", "OrderDetails1");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thay doi");
+                }
+            }
+            return RedirectToAction("Index", "OrderDetails1");
+        }
+
 
         // GET: OrderDetails1/Create
         public ActionResult Create()

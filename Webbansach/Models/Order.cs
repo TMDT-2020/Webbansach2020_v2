@@ -10,8 +10,11 @@ using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace Webbansach.Models
 {
+
     public class Order
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
+
         [Key]
         public int ID { get; set; }
         public string OrderName { get; set; }
@@ -25,6 +28,31 @@ namespace Webbansach.Models
 
         public string UserID { get; set; }
         public virtual IdentityUser IdentityUser { get; set; }
+        public bool Updatestt(Order order)
+        {
+            var oder = db.orders.Find(order.ID);
+            oder.Status = "Đã thanh toán";
+            db.SaveChanges();
+            return true;
+        }
+        public bool Updatestt2(Order order)
+        {
+            var oder = db.orders.Find(order.ID);
+            oder.Status = "Đã giao";
+            db.SaveChanges();
+            return true;
+        }
+        public bool Updatestt3(Order order)
+        {
+            var oder = db.orders.Find(order.ID);
+            oder.Status = "Đã hủy";
+            db.SaveChanges();
+            return true;
+        }
+        public Order ViewDT(int id)
+        {
+            return db.orders.Find(id);
+        }
 
     }
 }

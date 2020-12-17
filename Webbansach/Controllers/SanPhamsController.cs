@@ -115,6 +115,7 @@ namespace Webbansach.Controllers
                 if(item.SanPham.ID == productId)
                 {
                     cart.Remove(item);
+                    cart = null;
                     break;
                 }
 
@@ -182,25 +183,31 @@ namespace Webbansach.Controllers
 
             foreach(var item in cart)
             {
+                int ship = 15000;
+                int taxx = 10000;
+                int discount = 5000;
                 OrderDetail orderDetail = new OrderDetail()
                 {
                     OrderID = order.ID,
                     SanPhamID = item.SanPham.ID,
-                    Gia = Convert.ToInt32(item.SanPham.GiaKM),
+                    Gia = Convert.ToInt32((item.SanPham.GiaKM * item.SoLuong)+ship + taxx -discount),
                     SoLuong = item.SoLuong
                 };
                 db.OrderDetails.Add(orderDetail);
                 db.SaveChanges();
+
+                cart.Remove(item);
+                cart = null;
+                break;
             }
             gmail = new Gmail()
             {
                 To = currentUser.Email,
-                Subject = "Hoa don dien tu",
-                Body = ("Don hang " + order.ID + " Da dat thanh cong. Ban co the tra cuu don hang website!")
+                Subject = "Hoá đơn điện tử",
+                Body = ("Đơn hàng " + order.ID + "Đã đặt thành công bạn có thể tra cứu tại: webbansach2020tmdt.com")
             };
             gmail.SendMail();
-
-
+            Session["cart"] = cart;
             return RedirectToAction("Index","OrderDetails");
         }
 

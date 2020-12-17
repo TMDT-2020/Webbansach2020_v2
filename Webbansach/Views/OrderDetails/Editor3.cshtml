@@ -1,14 +1,9 @@
 ﻿@model IEnumerable<Webbansach.Models.OrderDetail>
-@using Webbansach.Models
-
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Editor";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-
-<table class="table container">
-
+<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Order.Email)
@@ -17,22 +12,18 @@
             @Html.DisplayNameFor(model => model.SanPham.TenSP)
         </th>
         <th>
-            Don gia
+            @Html.DisplayNameFor(model => model.Order.OrderDate)
         </th>
+
         <th>
             @Html.DisplayNameFor(model => model.Gia)
         </th>
-
         <th>
             @Html.DisplayNameFor(model => model.SoLuong)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Order.Status)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Order.OrderDate)
-        </th>
-
         <th></th>
     </tr>
 
@@ -46,8 +37,9 @@
                 @Html.DisplayFor(modelItem => item.SanPham.TenSP)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SanPham.GiaKM)
+                @Html.DisplayFor(modelItem => item.Order.OrderDate)
             </td>
+
             <td>
                 @Html.DisplayFor(modelItem => item.Gia)
             </td>
@@ -57,16 +49,19 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Order.Status)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Order.OrderDate)
-            </td>
 
-
-            <td>
-                @Html.ActionLink("Hủy đơn hàng", "Editor3", new { id = item.ID }) |
-                @Html.ActionLink("Details", "Details", new { id = item.ID }) |
+            <td style="padding: 0px; margin:0px;">
+                @using (Html.BeginForm("Editor3", "OrderDetails", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input type="submit" value="Hủy đơn" class="btn btn-default" />
+                        </div>
+                    </div>
+                }
             </td>
         </tr>
     }
 
 </table>
+

@@ -4,12 +4,6 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
@@ -57,7 +51,10 @@
     </td>
 
     <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.ID }) |
+        @Html.ActionLink("Xác nhận thanh toán", "Editor", new { id = item.ID }) |
+        @Html.ActionLink("Xác nhận giao", "Editor2", new { id = item.ID }) |
+        @Html.ActionLink("Xác nhận hủy", "Editor3", new { id = item.ID }) |
+
         @Html.ActionLink("Details", "Details", new { id = item.ID }) |
     </td>
 </tr>
