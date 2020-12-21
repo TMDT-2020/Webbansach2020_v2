@@ -10,6 +10,9 @@
             @Html.DisplayNameFor(model => model.Order.Email)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.SanPham.TenSP)
         </th>
         <th>
@@ -35,6 +38,9 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Order.Email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ID)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.SanPham.TenSP)

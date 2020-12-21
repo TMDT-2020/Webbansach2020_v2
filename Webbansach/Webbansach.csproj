@@ -231,8 +231,17 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="HinhAnh\1.jpg" />
     <Content Include="HinhAnh\background.png" />
+    <Content Include="HinhAnh\emhtknmkc.jpg" />
+    <Content Include="HinhAnh\GTCLKD.png" />
+    <Content Include="HinhAnh\kn.jpg" />
     <Content Include="HinhAnh\Logo.png" />
+    <Content Include="HinhAnh\NNA.jpg" />
+    <Content Include="HinhAnh\Picture2.jpg" />
+    <Content Include="HinhAnh\Picture3.jpg" />
+    <Content Include="HinhAnh\Picture4.jpg" />
+    <Content Include="HinhAnh\tdb.jpg" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\sleek.css.map" />

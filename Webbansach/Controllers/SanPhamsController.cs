@@ -174,7 +174,7 @@ namespace Webbansach.Controllers
                 Email = currentUser.Email,
                 Adress = currentUser.Adress,
                 PaymentType = "Cash",
-                Status = "Hoan thanh",
+                Status = "Chờ xét duyệt",
                 UserID = currentUser.Id
                 
             };
