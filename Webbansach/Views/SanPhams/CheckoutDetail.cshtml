@@ -2,7 +2,9 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+@{ 
+    
+}
 @if (Session["cart"] == null)
 {
     <div class="alert alert-danger">
@@ -18,17 +20,23 @@ else
                 <th>Product</th>
                 <th>Price</th>
                 <th>Quantity</th>
+                <th>Ship</th>
+                <th>Tax</th>
+                <th>Discount</th>
                 <th>Line Total</th>
 
             </tr>
         </thead>
         <tbody>
             @{
+                int ship = 15000;
+                int taxx = 10000;
+                int discount = 5000;
                 int Total = 0;
             }
             @foreach (Product item in (List<Product>)Session["cart"])
             {
-                int lineTotal = Convert.ToInt32(item.SoLuong * item.SanPham.GiaKM);
+                int lineTotal = Convert.ToInt32((item.SoLuong * item.SanPham.GiaKM)+ship + taxx - discount);
                 Total = Convert.ToInt32(@Total + lineTotal);
 
                 Session["SesTotal"] = Total;
@@ -37,6 +45,9 @@ else
                     <td>@item.SanPham.TenSP</td>
                     <td>@item.SanPham.GiaKM</td>
                     <td>@item.SoLuong</td>
+                    <td>@ship</td>
+                    <td>@taxx</td>
+                    <td>@discount</td>
                     <td>@lineTotal</td>
                 </tr>
             }

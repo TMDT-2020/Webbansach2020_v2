@@ -79,13 +79,14 @@ namespace Webbansach.Controllers
             else
             {
                 List<Product> cart = (List<Product>)Session["cart"];
-                var product = db.sanPhams.Find(productId); 
-                foreach(var item in cart)
+                var product = db.sanPhams.Find(productId);
+                var count = cart.Count();
+                for (int i = 0; i < count; i++)
                 {
-                    if(item.SanPham.ID == productId)
+                    if(cart[i].SanPham.ID == productId)
                     {
-                        int PrevQ = item.SoLuong;
-                        cart.Remove(item);
+                        int PrevQ = cart[i].SoLuong;
+                        cart.Remove(cart[i]);
                         cart.Add(new Product()
                         {
                             SanPham = product,
@@ -95,11 +96,15 @@ namespace Webbansach.Controllers
                     }
                     else
                     {
-                        cart.Add(new Product()
+                        var product2 = cart.Where(x => x.SanPham.ID == productId).SingleOrDefault();
+                        if(product2 == null)
                         {
-                            SanPham = product,
-                            SoLuong = 1
-                        });
+                            cart.Add(new Product()
+                            {
+                                SanPham = product,
+                                SoLuong = 1
+                            });
+                        }
                     }
                 }
                 Session["cart"] = cart;
@@ -109,10 +114,10 @@ namespace Webbansach.Controllers
         public ActionResult Remove(int productId)
         {
             List<Product> cart = (List<Product>)Session["cart"];
-            //var product = db.sanPhams.Find(productId);
-            foreach(var item in cart)
+            var product = db.sanPhams.Find(productId);
+            foreach (var item in cart)
             {
-                if(item.SanPham.ID == productId)
+                if (item.SanPham.ID == productId)
                 {
                     cart.Remove(item);
                     cart = null;
@@ -137,7 +142,7 @@ namespace Webbansach.Controllers
                         if (PrevQ > 0)
                         {
                             cart.Remove(item);
-                            cart.Add(new Webbansach.Models.Product()
+                            cart.Add(new Product()
                             {
                                 SanPham = product,
                                 SoLuong = PrevQ - 1
@@ -173,8 +178,9 @@ namespace Webbansach.Controllers
                 Phone = currentUser.SDT,
                 Email = currentUser.Email,
                 Adress = currentUser.Adress,
-                PaymentType = "Cash",
+                PaymentType = "Thanh toán khi nhận hàng",
                 Status = "Chờ xét duyệt",
+                StatusPayment = "Chưa thanh toán",
                 UserID = currentUser.Id
                 
             };
@@ -224,8 +230,9 @@ namespace Webbansach.Controllers
                 Phone = currentUser.SDT,
                 Email = currentUser.Email,
                 Adress = currentUser.Adress,
-                PaymentType = "Paypal",
-                Status = "Đã thanh toán",
+                PaymentType = "Thanh toán khi đặt hàng",
+                Status = "Chờ xét duyệt",
+                StatusPayment = "Đã thanh toán",
                 UserID = currentUser.Id
 
             };

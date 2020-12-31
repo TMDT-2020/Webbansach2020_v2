@@ -50,7 +50,7 @@ namespace Webbansach.Controllers
             {
                 var ud = new Order();
 
-                var result = ud.Updatestt(order);
+                var result = ud.Updatestt2(order);
                 if (result)
                 {
                     return RedirectToAction("Index", "OrderDetails1");
@@ -78,7 +78,7 @@ namespace Webbansach.Controllers
             {
                 var ud = new Order();
 
-                var result = ud.Updatestt2(order);
+                var result = ud.Updatestt4(order);
                 if (result)
                 {
                     return RedirectToAction("Index", "OrderDetails1");
@@ -119,6 +119,33 @@ namespace Webbansach.Controllers
             return RedirectToAction("Index", "OrderDetails1");
         }
 
+        public ActionResult Editor4(int id)
+        {
+            var oder = new Order().ViewDT(id);
+            List<OrderDetail> orderDetails = db.OrderDetails.Where(x => x.ID == id).ToList();
+
+            return View(orderDetails);
+        }
+
+        [HttpPost]
+        public ActionResult Editor4(Order order)
+        {
+            if (ModelState.IsValid)
+            {
+                var ud = new Order();
+
+                var result = ud.Updatestt(order);
+                if (result)
+                {
+                    return RedirectToAction("Index", "OrderDetails1");
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Thay doi");
+                }
+            }
+            return RedirectToAction("Index", "OrderDetails1");
+        }
 
         // GET: OrderDetails1/Create
         public ActionResult Create()

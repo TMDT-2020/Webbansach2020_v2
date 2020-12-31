@@ -24,9 +24,6 @@
         <th>
             @Html.DisplayNameFor(model => model.Order.Status)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Order.StatusPayment)
-        </th>
         <th></th>
     </tr>
 
@@ -52,16 +49,13 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Order.Status)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Order.StatusPayment)
-            </td>
 
-            <td  style="padding: 0px; margin:0px;">
-                @using (Html.BeginForm("Editor", "OrderDetails1", FormMethod.Post))
+            <td style="padding: 0px; margin:0px;">
+                @using (Html.BeginForm("Editor4", "OrderDetails1", FormMethod.Post))
                 {
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Đang giao" class="btn btn-default" />
+                            <input type="submit" value="Đã thanh toán" class="btn btn-default" />
                         </div>
                     </div>
                 }

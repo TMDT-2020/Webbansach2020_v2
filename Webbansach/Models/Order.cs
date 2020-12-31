@@ -21,6 +21,7 @@ namespace Webbansach.Models
         public DateTime OrderDate { get; set; }
         public string PaymentType { get; set; }
         public string Status { get; set; }
+        public string StatusPayment { get; set; }
         public string Name { get; set; }
         public int Phone { get; set; }
         public string Email { get; set; }
@@ -31,14 +32,14 @@ namespace Webbansach.Models
         public bool Updatestt(Order order)
         {
             var oder = db.orders.Find(order.ID);
-            oder.Status = "Đã thanh toán";
+            oder.StatusPayment = "Đã thanh toán";
             db.SaveChanges();
             return true;
         }
         public bool Updatestt2(Order order)
         {
             var oder = db.orders.Find(order.ID);
-            oder.Status = "Đã giao";
+            oder.Status = "Đang giao";
             db.SaveChanges();
             return true;
         }
@@ -46,6 +47,13 @@ namespace Webbansach.Models
         {
             var oder = db.orders.Find(order.ID);
             oder.Status = "Đã hủy";
+            db.SaveChanges();
+            return true;
+        }
+        public bool Updatestt4(Order order)
+        {
+            var oder = db.orders.Find(order.ID);
+            oder.Status = "Đã giao";
             db.SaveChanges();
             return true;
         }

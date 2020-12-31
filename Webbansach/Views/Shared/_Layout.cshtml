@@ -66,12 +66,18 @@
                     </li>
                     <li id="nav-cart">
                         <button onclick="location.href='@Url.Action("Checkout","SanPhams")'">
+                            @{ List<Product> cart = (List<Product>)Session["cart"];}
                             @if (Session["cart"] != null)
                             {
-                                foreach (Product item in (List<Product>)Session["cart"])
+                                int item = 0;
+                                var count = cart.Count();
+                                for (int i = 0; i < count; i++)
                                 {
-                <span style="color: white;">@item.SoLuong</span>}
-        }
+                                    item = count;
+                                    
+                                }
+                                <span style="color: white;">@item</span>
+                            }
                             <i class="fas fa-shopping-cart" style="color: white;"></i>
                         </button>
                     </li>
