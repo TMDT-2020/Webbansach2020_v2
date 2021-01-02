@@ -187,11 +187,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202012310503317_Init.cs" />
-    <Compile Include="Migrations\202012310503317_Init.Designer.cs">
-      <DependentUpon>202012310503317_Init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Gmail.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -370,6 +365,16 @@
     <Content Include="Views\OrderDetails1\Editor3.cshtml" />
     <Content Include="Views\OrderDetails\Editor3.cshtml" />
     <Content Include="Views\OrderDetails1\Editor4.cshtml" />
+    <Content Include="Views\OrderDetails\Searching.cshtml" />
+    <Content Include="Views\Admin\QuanLiDoanhThu.cshtml" />
+    <Content Include="Views\Admin\DonHuy.cshtml" />
+    <Content Include="Views\Admin\DangGiao.cshtml" />
+    <Content Include="Views\Admin\DaGiao.cshtml" />
+    <Content Include="Views\Admin\ChoXetDuyet.cshtml" />
+    <Content Include="Views\Admin\ChuaThanhToan.cshtml" />
+    <Content Include="Views\Admin\DaThanhToan.cshtml" />
+    <Content Include="Views\SanPhams\Orderwithnoname.cshtml" />
+    <Content Include="Views\SanPhams\HoanthanhOrder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -388,11 +393,6 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202012310503317_Init.resx">
-      <DependentUpon>202012310503317_Init.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

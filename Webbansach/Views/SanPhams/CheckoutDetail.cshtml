@@ -2,8 +2,8 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@{ 
-    
+@{
+
 }
 @if (Session["cart"] == null)
 {
@@ -36,7 +36,7 @@ else
             }
             @foreach (Product item in (List<Product>)Session["cart"])
             {
-                int lineTotal = Convert.ToInt32((item.SoLuong * item.SanPham.GiaKM)+ship + taxx - discount);
+                int lineTotal = Convert.ToInt32((item.SoLuong * item.SanPham.GiaKM) + ship + taxx - discount);
                 Total = Convert.ToInt32(@Total + lineTotal);
 
                 Session["SesTotal"] = Total;
@@ -58,8 +58,14 @@ else
             </tr>
         </tbody>
     </table>
-    <a href="@Url.Action("ProcessOrder", "SanPhams")" class="btn btn-success">Thanh toán</a>
-    <a href="@Url.Action("PaymentWithPaypal", "Payment")" class="btn btn-success">Paypal</a>
-
+    if (User.Identity.IsAuthenticated)
+    {
+        <a href="@Url.Action("ProcessOrder", "SanPhams")" class="btn btn-success">Thanh toán</a>
+        <a href="@Url.Action("PaymentWithPaypal", "Payment")" class="btn btn-success">Paypal</a>
+    }
+    else
+    {
+        <a href="@Url.Action("Orderwithnoname", "SanPhams")" class="btn btn-success">Nhập thông tin khách hàng</a>
+    }
 }
 

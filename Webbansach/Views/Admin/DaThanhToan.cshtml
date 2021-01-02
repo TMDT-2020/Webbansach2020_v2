@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Webbansach.Models.OrderDetail>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Order.Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SanPham.TenSP)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Order.OrderDate)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Gia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Order.PaymentType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SoLuong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Order.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Order.StatusPayment)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        if (item.Order.StatusPayment.Length == 13)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.Email)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SanPham.TenSP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.OrderDate)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Gia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.PaymentType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SoLuong)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.Status)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.StatusPayment)
+                </td>
+                <td>
+                    @{
+                        if (item.Order.Status.Length == 6 || item.Order.Status.Length == 7)
+                        {
+                            @Html.ActionLink("Details", "Details", new { id = item.ID })
+
+                        }
+                        else if (item.Order.Status.Length == 13)
+                        {
+                            @Html.ActionLink("Xác nhận giao | ", "Editor", new { id = item.ID })
+                            @Html.ActionLink("Details", "Details", new { id = item.ID })
+
+
+                        }
+                        else
+                        {
+                            @Html.ActionLink("Xác nhận Đã giao | ", "Editor2", new { id = item.ID })
+                            @Html.ActionLink("Details", "Details", new { id = item.ID })
+                        }
+                    }
+                </td>
+                <td>
+                    @Html.ActionLink("Xác nhận thanh toán | ", "Editor4", new { id = item.ID })
+                    @Html.ActionLink("Details", "Details", new { id = item.ID })
+
+                </td>
+            </tr>
+
+        }
+    }
+
+</table>

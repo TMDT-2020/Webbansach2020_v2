@@ -201,7 +201,6 @@ namespace Webbansach.Controllers
                 };
                 db.OrderDetails.Add(orderDetail);
                 db.SaveChanges();
-
                 cart.Remove(item);
                 cart = null;
                 break;
@@ -220,6 +219,7 @@ namespace Webbansach.Controllers
         {
             List<Product> cart = (List<Product>)Session["cart"];
             var product = db.sanPhams.Find(productId);
+            var Sp = new SanPham();
             var user = User.Identity.GetUserId();
             ApplicationUser currentUser = db.Users.FirstOrDefault(x => x.Id == user);
 
@@ -269,6 +269,61 @@ namespace Webbansach.Controllers
             return RedirectToAction("Index", "OrderDetails");
         }
 
+        public ActionResult Orderwithnoname()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Orderwithnoname(Gmail gmail, string Ordername, int phone, string email, string address, int? productId)
+        {
+            List<Product> cart = (List<Product>)Session["cart"];
+            var product = db.sanPhams.Find(productId);
+
+            Order order = new Order()
+            {
+                OrderDate = DateTime.Now,
+                Name = Ordername,
+                Phone = phone,
+                Email = email,
+                Adress = address,
+                PaymentType = "Thanh toán khi nhận hàng",
+                Status = "Chờ xét duyệt",
+                StatusPayment = "Chưa thanh toán"
+            };
+
+            db.orders.Add(order);
+            db.SaveChanges();
+
+            foreach (var item in cart)
+            {
+                int ship = 15000;
+                int taxx = 10000;
+                int discount = 5000;
+                OrderDetail orderDetail = new OrderDetail()
+                {
+                    OrderID = order.ID,
+                    SanPhamID = item.SanPham.ID,
+                    Gia = Convert.ToInt32((item.SanPham.GiaKM * item.SoLuong) + ship + taxx - discount),
+                    SoLuong = item.SoLuong
+                };
+                db.OrderDetails.Add(orderDetail);
+                db.SaveChanges();
+                cart.Remove(item);
+                cart = null;
+                break;
+            }
+            gmail = new Gmail()
+            {
+                To = email,
+                Subject = "Hoá đơn điện tử",
+                Body = ("Đơn hàng " + order.ID + " Đã đặt thành công bạn có thể tra cứu tại: webbansach2020tmdt.com")
+            };
+            gmail.SendMail();
+            Session["cart"] = cart;
+            return RedirectToAction("HoanthanhOrder");
+
+        }
         public ActionResult HoanthanhOrder()
         {
             return View();
@@ -283,7 +338,6 @@ namespace Webbansach.Controllers
 
             return View();
         }
-
         // POST: SanPhams/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

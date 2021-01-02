@@ -1,0 +1,27 @@
+﻿@model Webbansach.Models.Order
+
+@{
+    ViewBag.Title = "Orderwithnoname";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Orderwithnoname</h2>
+
+@using (Html.BeginForm("Orderwithnoname", "SanPhams", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="container">
+        <input id="searchatring" name="Ordername" type="text" value="" style="border: #FF6161 solid 1px;" placeholder="Tên của bạn">
+        <hr />
+        <input id="searchatring" name="phone" type="text" value="" style="border: #FF6161 solid 1px;" placeholder="Số điện thoại">
+        <hr />
+        <input id="searchatring" name="email" type="text" value="" style="border: #FF6161 solid 1px;" placeholder="Email">
+        <hr />
+        <input id="searchatring" name="address" type="text" value="" style="border: #FF6161 solid 1px;" placeholder="Address">
+        <hr />
+        <button style="border:none;background:none;color:firebrick" class="btn btn-outline-dark" type="submit">Mua ngay</button>
+
+    </div>
+
+}    

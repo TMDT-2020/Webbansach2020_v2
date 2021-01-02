@@ -52,14 +52,14 @@
             </div>
             <div class="nav-menu-right">
                 <ul>
-
                     <li class="ul-item" style="padding-top: 15px; ">
                         @using (Html.BeginForm("Searching", "SanPhams", FormMethod.Get))
                         {
-            <p>
-                <input id="searchString" name="searchString" type="text" value="" style="border: #FF6161 solid 1px;" placeholder="Bạn muốn tìm gì...">
-                <button style="border:none;background:none;color:firebrick" class="btntop" type="submit"><i class="fas fa-search"></i></button>
-            </p>}
+                            <p>
+                                <input id="searchatring" name="searchString" type="text" value="" style="border: #FF6161 solid 1px;" placeholder="Bạn muốn tìm gì...">
+                                <button style="border:none;background:none;color:firebrick" class="btntop" type="submit"><i class="fas fa-search"></i></button>
+                            </p>
+                         }
                     </li>
                     <li>
                         @Html.Partial("_LoginPartial")

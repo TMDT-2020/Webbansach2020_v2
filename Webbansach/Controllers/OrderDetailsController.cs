@@ -24,6 +24,16 @@ namespace Webbansach.Controllers
             List<OrderDetail> orderDetails = db.OrderDetails.Where(x => x.Order.UserID == currentUser.Id).ToList();
             return View(orderDetails);
         }
+        public ActionResult Searching(string searchString)
+        {
+            var Loc = from p in db.OrderDetails
+                      select p;
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                Loc = Loc.Where(s => s.Order.Email.ToString().Contains(searchString));
+            }
+            return View(Loc);
+        }
         public ActionResult Index2()
         {
             var orderDetails = db.OrderDetails.Include(o => o.Order).Include(o => o.SanPham);

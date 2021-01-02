@@ -1,0 +1,41 @@
+﻿@using Webbansach.Models
+@{
+    ViewBag.Title = "QuanLiDoanhThu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@{
+    ApplicationDbContext db = new ApplicationDbContext();
+}
+<div>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Tổng doanh thu
+        </dt>
+        @{
+            int tdt = 0;
+        }
+        <dd>
+            @foreach (var item in db.OrderDetails)
+            {
+                tdt += item.Gia;
+            }
+            @tdt
+        </dd>
+    </dl>
+    <div>
+        <a class="btn btn-outline-dark" href="@Url.Action("DonHuy","Admin")" role="button">Quản Lí Đơn hủy | </a>
+        <a class="btn btn-outline-dark" href="@Url.Action("ChoXetDuyet","Admin")" role="button">Quản Lí Đơn chờ duyệt | </a>
+        <a class="btn btn-outline-dark" href="@Url.Action("DangGiao","Admin")" role="button">Quản Lí đơn đang giao | </a>
+        <a class="btn btn-outline-dark" href="@Url.Action("DaGiao","Admin")" role="button">Quản Lí Đơn đã giao | </a>
+
+    </div>
+    <hr />
+    @*<div>
+        <a class="btn btn-outline-dark" href="@Url.Action("ChuaThanhToan","Admin")" role="button">Quản Lí Đơn chưa thanh toán | </a>
+        <a class="btn btn-outline-dark" href="@Url.Action("DaThanhToan","Admin")" role="button">Quản Lí Đơn đã thanh toán | </a>
+    </div>*@
+
+</div>
+
+
